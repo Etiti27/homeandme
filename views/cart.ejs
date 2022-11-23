@@ -1,0 +1,68 @@
+<%- include("./partials/header")  %>
+
+<table> 
+<tr>
+    <th>product</th>
+    <th>Quantity</th>
+    <th> SubTotal</th>
+    <th>remove</th>
+</tr>
+    <%cart.forEach(function(item){%>
+    
+    <tr>
+        <td>
+        <img class="cartImage"  src="../public/images/<%=item.image %>" alt="" srcset="">
+        <span><%=item.name %></span>
+        </td>
+    
+
+
+    
+    
+        <td>
+            <form action="/edit" method="post">
+               <span> <input type="hidden" name="id" value="<%=item.id%>"></span><span>
+                <input  type="submit" value="-" name="decrease"> </span><span>
+                <input type="text" class="edit-input" value="<%=item.quantity%>" name="quantity" readonly >
+            </span><input type="submit" value="+" name="increase">
+                
+            </form>
+        </td>
+    
+
+    
+    
+        <td >
+            
+               <% if(item.salePrice){%>
+                    <span><%=item.salePrice * item.quantity%></span>
+
+                <%}
+                else{%>
+                    <span> $<%=item.price * item.quantity%></span>
+   
+                <%}%>
+            
+                   
+        </td>
+        <td>
+            <form class="remove-form" action="/remove" method="post">
+                <input type="hidden" name="id" value="<%=item.id%>">
+                <input type="submit" value="x">
+            </form> 
+        </td>
+        
+            
+       
+        
+    </tr>
+<%})%>
+
+</table>
+<hr>
+<h2 class="subtotal">total: $ <%=total %></h2>
+<form action="/checkout" method="get">
+    <input type="submit" value="checkout">
+</form>
+
+<%-include('./partials/footer')%>  

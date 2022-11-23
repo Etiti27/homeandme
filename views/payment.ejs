@@ -1,0 +1,18 @@
+<%-include('./partials/header')%>  
+    <h3>Welcome to Payment Gateway</h3>
+    <form action="/payment" method="post">
+       <script
+          src="//checkout.stripe.com/v2/checkout.js"
+          class="stripe-button"
+          data-key="<%= key %>"
+          data-amount="<%=cost%>"
+          data-currency="usd"
+          data-name="Crafty Gourav"
+          data-description="Handmade Art and Craft Products"
+          data-locale="auto" >
+        </script>
+        <script src="https://js.stripe.com/v3/"></script>
+        <script src="../card.js"></script>
+    </form>
+<%-include('./partials/footer')%>  
+    
